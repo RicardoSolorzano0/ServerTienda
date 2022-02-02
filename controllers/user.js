@@ -5,8 +5,9 @@ const User = require("../models/user");
 function signUp(req, res) {
     const user = new User();
 
-    const { email, password, repeatPassword } = req.body;
-
+    const { name, lastname, email, password, repeatPassword } = req.body;
+    user.name = name;
+    user.lastname = lastname;
     user.email = email.toLowerCase();
     user.role = "Usuario";
 
@@ -20,7 +21,7 @@ function signUp(req, res) {
                 if (err) {
                     res.status(500).send({ message: "Error al encriptar la contraseña" });
                 } else {
-                    //res.status(200).send({ message: hash });
+
                     user.password = hash;
                     user.save((err, userStored) => {
                         if (err) {
