@@ -1,7 +1,6 @@
 const bcrypt = require("bcrypt-nodejs");
 const jwt = require("../services/jwt");
 const User = require("../models/user");
-const { param, checkout } = require("../routers/user");
 
 function signUp(req, res) {
     const user = new User();
@@ -22,7 +21,6 @@ function signUp(req, res) {
                 if (err) {
                     res.status(500).send({ message: "Error al encriptar la contraseña" });
                 } else {
-
                     user.password = hash;
                     user.save((err, userStored) => {
                         if (err) {
